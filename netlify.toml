@@ -1,0 +1,5 @@
+# The deployable site is the single self-contained page in christian-waldo/.
+# Everything else in this repo (src/, assets/, build.sh) builds the client PDFs
+# locally and is not part of the site.
+[build]
+  publish = "christian-waldo"
