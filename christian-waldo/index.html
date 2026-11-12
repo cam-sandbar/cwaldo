@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christian Waldo — Production, Mixing, Mastering</title>
+<meta name="description" content="Christian Waldo is a music producer. Production, mixing, mastering and commissioned music, kept on one shelf.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ---------------------------------------------------------------
+   THE TAPE VAULT
+   board + label + ink, one reserved blue. hard edges only.
+----------------------------------------------------------------- */
+:root{
+  --board:#b6c2cb;        /* box board */
+  --board-dark:#8d9aa4;   /* shelf board */
+  --ground:#dce5ec;       /* pale blue room light */
+  --label:#f8fafb;        /* gummed label */
+  --ink:#232b31;          /* ink */
+  --ink-soft:#4e5a63;
+  --steel:#5d6871;        /* shelf steel */
+  --blue:#1f63a8;         /* chinagraph — the one reserved value */
+  --blue-pale:#e4eef8;
+  --rule:3px;
+  --mono:"Courier Prime",ui-monospace,"Courier New",monospace;
+  --stencil:"Archivo Narrow","Arial Narrow",sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-color:var(--steel) var(--ground);-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--mono);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--blue);color:#fff}
+::-webkit-scrollbar{width:14px;height:14px}
+::-webkit-scrollbar-track{background:var(--ground);border-left:var(--rule) solid var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--steel);border:3px solid var(--ground)}
+::-webkit-scrollbar-thumb:hover{background:var(--ink)}
+a{color:inherit;text-decoration-thickness:2px;text-underline-offset:4px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.board-ground :focus-visible,.blue-ground :focus-visible{outline-color:var(--label)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+h1,h2,h3,.stencil{font-family:var(--stencil);text-transform:uppercase;font-weight:700;letter-spacing:.01em;line-height:.94}
+.caps{font-family:var(--stencil);text-transform:uppercase;font-weight:700;letter-spacing:.22em;font-size:11.5px}
+
+/* ---------- VAULT: first viewport ---------- */
+.vault{min-height:100svh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.topband{display:flex;align-items:stretch;flex:0 0 auto;position:relative;z-index:2}
+
+.indexcard{
+  flex:0 0 clamp(300px,33vw,470px);
+  background:var(--label);
+  border-right:var(--rule) solid var(--ink);
+  border-bottom:var(--rule) solid var(--ink);
+  padding:clamp(22px,2.4vw,34px) clamp(22px,2.4vw,36px) clamp(20px,2vw,30px);
+  position:relative;
+}
+.indexcard h1{font-size:clamp(42px,5.2vw,72px);margin-bottom:clamp(14px,1.4vw,20px)}
+.indexcard .rule{height:var(--rule);background:var(--ink);margin:0 0 14px}
+.services{list-style:none;font-size:13px;letter-spacing:.06em;line-height:1.85;text-transform:uppercase}
+.services li::before{content:"· "}
+.shelfmark{
+  position:absolute;right:clamp(22px,2.4vw,36px);bottom:clamp(20px,2vw,30px);
+  border:2px solid var(--blue);color:var(--blue);
+  font-family:var(--stencil);font-weight:700;font-size:11px;letter-spacing:.2em;
+  padding:7px 10px;text-align:center;line-height:1.35;transform:rotate(-4deg);
+}
+.lede{
+  flex:1;padding:clamp(24px,2.6vw,40px) clamp(22px,2.6vw,44px);
+  border-bottom:var(--rule) solid var(--ink);
+  display:flex;align-items:flex-start;justify-content:space-between;gap:clamp(24px,3vw,56px);
+}
+.lede p{font-size:clamp(17px,1.35vw,21px);line-height:1.55;max-width:38ch;flex:1 1 auto}
+.lede p strong{font-family:var(--stencil);font-weight:700;font-size:1.16em;text-transform:uppercase;letter-spacing:.005em;display:block;line-height:1.08;margin-bottom:12px}
+.cue{
+  flex:0 0 clamp(260px,24vw,340px);align-self:flex-start;
+  border:var(--rule) solid var(--ink);background:var(--blue-pale);
+  padding:14px 18px 16px;max-width:100%;
+}
+.cue .caps{color:var(--blue);display:block;margin-bottom:6px}
+.cue .now{font-size:15px;display:flex;justify-content:space-between;gap:18px;align-items:baseline}
+.cue .now b{font-weight:700}
+.cue .bar{height:10px;background:var(--label);border:2px solid var(--ink);margin-top:14px;position:relative;overflow:hidden}
+.cue .bar i{position:absolute;inset:0 62% 0 0;background:var(--blue)}
+
+/* ---------- the shelf ---------- */
+.shelf{flex:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:1}
+.rail{height:16px;background:var(--steel);border-top:var(--rule) solid var(--ink);border-bottom:var(--rule) solid var(--label);flex:0 0 auto}
+.run{
+  display:flex;align-items:stretch;background:var(--board-dark);
+  border-bottom:var(--rule) solid var(--ink);
+  min-height:min(58svh,470px);
+}
+.box{
+  flex:1 1 0;min-width:0;position:relative;
+  background:var(--board);
+  border-right:var(--rule) solid var(--ink);
+  padding:18px 16px 16px;
+  text-align:left;font:inherit;color:inherit;cursor:pointer;
+  display:flex;flex-direction:column;
+  transition:transform .55s var(--ease),background-color .45s var(--ease),box-shadow .55s var(--ease);
+  transform:translateY(0);
+}
+.box:last-of-type{border-right:0}
+.box .tag{
+  background:var(--label);border:2px solid var(--ink);padding:12px 13px 14px;
+  transition:border-color .45s var(--ease),background-color .45s var(--ease);
+}
+.box .tag>span,.sheet .title,.sheet .credit,.labelsheet .no,.labelsheet .fmt,.slot .blank .no{display:block}
+.box .no{font-family:var(--stencil);font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--ink-soft)}
+.box .ttl{font-family:var(--stencil);text-transform:uppercase;font-weight:700;font-size:clamp(15px,1.25vw,19px);line-height:1.05;margin:7px 0 8px}
+.box .meta{font-size:11.5px;line-height:1.55;color:var(--ink-soft)}
+.box .hub{
+  width:clamp(78px,7.4vw,124px);aspect-ratio:1;border:clamp(12px,1.4vw,22px) solid rgba(35,43,49,.17);border-radius:50%;outline:var(--rule) solid var(--board-dark);outline-offset:-2px;
+  margin:auto auto 0;position:relative;transition:border-color .45s var(--ease);
+}
+.box .hub::after{content:"";position:absolute;left:50%;top:50%;width:46%;height:46%;transform:translate(-50%,-50%);border:var(--rule) solid var(--board-dark);border-radius:50%;transition:border-color .45s var(--ease)}
+.box .hub::before{content:"";position:absolute;left:calc(50% - 1.5px);top:-8%;width:3px;height:22%;background:var(--board-dark);transform-origin:50% 218%;transition:background-color .45s var(--ease)}
+.box .spine{
+  margin-top:14px;border-top:2px solid var(--ink);padding-top:9px;
+  font-family:var(--stencil);font-size:11px;letter-spacing:.17em;font-weight:700;
+  display:flex;justify-content:space-between;gap:10px;
+}
+.box:hover{transform:translateY(-14px)}
+.box[aria-pressed="true"]{
+  background:var(--blue);color:#fff;transform:translateY(-26px);z-index:3;
+  box-shadow:0 22px 34px -16px rgba(35,43,49,.5);
+}
+.box[aria-pressed="true"] .tag{border-color:var(--blue);background:var(--label)}
+.box[aria-pressed="true"] .ttl{color:var(--blue)}
+.box[aria-pressed="true"] .hub{border-color:rgba(255,255,255,.3);outline-color:#fff}
+.box[aria-pressed="true"] .hub::after{border-color:#fff}
+.box[aria-pressed="true"] .hub::before{background:#fff;animation:spin 3.4s linear infinite}
+.box[aria-pressed="true"] .spine{border-color:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.slot{
+  flex:0 0 clamp(210px,18vw,268px);position:relative;
+  border-left:var(--rule) dashed var(--label);
+  background:transparent;padding:18px 16px 20px;
+  display:flex;flex-direction:column;
+}
+.slot .blank{
+  background:var(--blue);border:var(--rule) solid var(--label);color:#fff;padding:20px 18px 22px;
+  display:flex;flex-direction:column;flex:1;text-decoration:none;
+  transition:transform .5s var(--ease),background-color .3s var(--ease);
+}
+.slot .blank .lines{margin:auto 0 18px;display:block}
+.slot .blank .lines i{display:block;height:2px;background:rgba(255,255,255,.55);margin-bottom:13px}
+.slot .blank .lines i:nth-child(2){width:78%}
+.slot .blank .lines i:nth-child(3){width:54%}
+.slot .blank:hover{transform:translateY(-6px);background:#17508b}
+.slot .blank .no{color:#cfe2f5}
+.slot .blank .t{font-family:var(--stencil);text-transform:uppercase;font-weight:700;font-size:clamp(24px,2.1vw,34px);line-height:.98;margin-top:10px}
+.slot .blank .arrow{display:block;font-size:12.5px;letter-spacing:.16em;font-family:var(--stencil);font-weight:700;border-top:2px solid rgba(255,255,255,.55);padding-top:12px}
+.slot .punch{margin-top:auto;display:flex;justify-content:space-between;padding:0 6px}
+.slot .punch i{width:13px;height:13px;border:2px solid var(--label);border-radius:50%}
+
+/* ---------- reel sheet (expanded detail) ---------- */
+.sheet{
+  background:var(--label);border-bottom:var(--rule) solid var(--ink);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) auto;gap:0;
+  position:relative;z-index:2;
+}
+.sheet>div{padding:22px clamp(22px,2.2vw,34px);border-right:2px solid var(--ink)}
+.sheet>div:last-child{border-right:0}
+.sheet .caps{color:var(--ink-soft);display:block;margin-bottom:8px}
+.sheet .title{font-family:var(--stencil);text-transform:uppercase;font-weight:700;font-size:clamp(18px,1.6vw,24px);line-height:1.02}
+.sheet .credit{font-size:13.5px;color:var(--ink-soft);margin-top:7px}
+.sheet .tracks{list-style:none;font-size:13.5px;columns:2;column-gap:26px}
+.sheet .tracks li{display:flex;justify-content:space-between;gap:14px;padding:4px 0;border-bottom:1px dotted #b7c0c7;break-inside:avoid}
+.sheet .tracks li span{color:var(--ink-soft)}
+.sheet .play{
+  display:flex;align-items:center;gap:12px;border:var(--rule) solid var(--ink);background:var(--blue);color:#fff;
+  font-family:var(--stencil);text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.16em;
+  padding:13px 18px;cursor:pointer;align-self:center;transition:background-color .3s var(--ease)
+}
+.sheet .play:hover{background:#17508b}
+.sheet .play svg{width:13px;height:15px;flex:0 0 auto}
+
+/* ---------- label sheet: services ---------- */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  padding:clamp(48px,6vw,86px) clamp(22px,4vw,56px) clamp(20px,2vw,28px);
+}
+.section-head h2{font-size:clamp(34px,4.4vw,62px)}
+.section-head p{max-width:46ch;font-size:15px;color:var(--ink-soft)}
+.labelsheet{
+  margin:0 clamp(22px,4vw,56px);
+  background:var(--label);border:var(--rule) solid var(--ink);
+  padding:clamp(14px,1.3vw,20px);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.labelsheet .lbl{
+  padding:clamp(24px,2.3vw,34px);border-right:2px dashed var(--board-dark);position:relative;
+  transition:background-color .4s var(--ease);
+}
+.labelsheet .lbl:last-child{border-right:0}
+.labelsheet .lbl:hover{background:var(--blue-pale)}
+.labelsheet h3{font-size:clamp(20px,1.9vw,27px);margin:14px 0 10px}
+.labelsheet p{font-size:14px;line-height:1.6;color:var(--ink-soft)}
+.labelsheet .no{font-family:var(--stencil);font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--blue)}
+.labelsheet .fmt{margin-top:18px;padding-top:12px;border-top:2px solid var(--ink);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* ---------- index card: about ---------- */
+.about{
+  background:var(--board-dark);border-top:var(--rule) solid var(--ink);border-bottom:var(--rule) solid var(--ink);
+  padding:clamp(40px,5vw,78px) clamp(22px,4vw,56px);
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(24px,3vw,44px);align-items:start;
+}
+.about .card{background:var(--label);border:var(--rule) solid var(--ink);padding:clamp(24px,2.6vw,40px)}
+.about h2{font-size:clamp(32px,3.6vw,52px);margin-bottom:18px}
+.about p{font-size:16px;line-height:1.7;max-width:62ch;margin-bottom:14px}
+.about .mark{display:inline-block;margin-top:10px;border:2px solid var(--blue);color:var(--blue);font-family:var(--stencil);font-size:11.5px;letter-spacing:.18em;font-weight:700;padding:8px 12px}
+.about .facts{list-style:none;margin-top:22px;border-top:var(--rule) solid var(--ink)}
+.about .facts li{display:flex;gap:18px;padding:9px 0;border-bottom:1px dotted #b7c0c7;font-size:13.5px}
+.about .facts b{flex:0 0 42%;font-family:var(--stencil);text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;font-weight:700;color:var(--ink-soft);padding-top:3px}
+.photo{background:var(--board);border:var(--rule) solid var(--ink);padding:14px}
+.photo .plate{
+  aspect-ratio:4/5;border:2px solid var(--ink);background:var(--steel);
+  display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:28px;
+}
+.photo .plate::before,.photo .plate::after{content:"";position:absolute;width:26px;height:26px;border:2px solid var(--label);opacity:.8}
+.photo .plate::before{left:20px;top:20px;border-right:0;border-bottom:0}
+.photo .plate::after{right:20px;bottom:20px;border-left:0;border-top:0}
+.photo .plate span{font-family:var(--stencil);text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--label);padding:0 24px;line-height:1.6}
+.photo .cap{background:var(--label);border:2px solid var(--ink);border-top:0;padding:11px 13px;font-size:11.5px;color:var(--ink-soft)}
+
+/* ---------- empty slot: contact ---------- */
+.contact{
+  background:var(--blue);color:#fff;
+  padding:clamp(44px,5.5vw,88px) clamp(22px,4vw,56px);
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,4vw,60px);align-items:start;
+}
+.contact .pitch{color:#fff}
+.contact h2{font-size:clamp(38px,5vw,74px);margin-bottom:18px}
+.contact .pitch p{font-size:17px;line-height:1.6;max-width:36ch;color:#f1f6fc}
+.contact .direct{margin-top:26px;border-top:2px solid rgba(255,255,255,.55);padding-top:16px;font-size:14px;color:#f1f6fc}
+.contact .direct a{font-family:var(--stencil);text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:15px;color:#fff;display:inline-block;margin-top:6px}
+form{background:var(--label);border:var(--rule) solid #0f3f6e;color:var(--ink);padding:clamp(22px,2.4vw,34px)}
+.field{margin-bottom:16px}
+.field label{display:block;font-family:var(--stencil);text-transform:uppercase;font-weight:700;font-size:11px;letter-spacing:.2em;color:var(--ink-soft);margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--mono);font-size:15px;color:var(--ink);
+  background:transparent;border:0;border-bottom:2px solid var(--ink);padding:9px 6px;
+  caret-color:var(--blue);border-radius:0;
+}
+.field textarea{resize:vertical;min-height:88px;border:2px solid var(--ink);padding:12px}
+.field input::placeholder,.field textarea::placeholder{color:#66717a}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--blue);background:var(--blue-pale)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+button.send{
+  width:100%;margin-top:6px;background:var(--blue);color:#fff;border:var(--rule) solid var(--ink);
+  font-family:var(--stencil);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.2em;
+  padding:15px;cursor:pointer;transition:background-color .3s var(--ease),transform .4s var(--ease);
+}
+button.send:hover{background:#17508b;transform:translateY(-2px)}
+button.send:disabled{background:var(--board-dark);border-color:var(--ink-soft);color:#eef2f5;cursor:not-allowed;transform:none}
+.formnote{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.5}
+.formnote.err{color:#9c2a1f}
+
+/* ---------- footer rail ---------- */
+footer{background:var(--ink);color:#c6d2db;padding:26px clamp(22px,4vw,56px)}
+footer .in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;font-family:var(--stencil);text-transform:uppercase;font-size:11.5px;letter-spacing:.2em;font-weight:700}
+footer a:hover{color:#fff}
+.replace{
+  margin-top:18px;padding-top:14px;border-top:2px solid #46525b;
+  font-size:11.5px;letter-spacing:.02em;line-height:1.7;color:#95a4af;text-transform:none;font-family:var(--mono);
+}
+
+/* ---------- entrance: boxes settle into the rail, once ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .run .box,.run .slot{animation:settle .7s var(--ease) both}
+  .run>*:nth-child(1){animation-delay:.02s}
+  .run>*:nth-child(2){animation-delay:.07s}
+  .run>*:nth-child(3){animation-delay:.12s}
+  .run>*:nth-child(4){animation-delay:.17s}
+  .run>*:nth-child(5){animation-delay:.22s}
+  .run>*:nth-child(6){animation-delay:.27s}
+  .run>*:nth-child(7){animation-delay:.32s}
+  @keyframes settle{from{transform:translateY(-30px);opacity:.35}to{transform:translateY(0);opacity:1}}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- adaptation ---------- */
+@media (max-width:1100px){
+  .sheet{grid-template-columns:1fr 1fr}
+  .sheet .play{grid-column:span 2;border-top:2px solid var(--ink);justify-content:center}
+  .labelsheet{grid-template-columns:1fr 1fr}
+  .labelsheet .lbl:nth-child(2){border-right:0}
+  .labelsheet .lbl:nth-child(-n+2){border-bottom:2px dashed var(--board-dark)}
+}
+@media (max-width:900px){
+  .lede{flex-direction:column;align-items:stretch}
+  .cue{flex:0 0 auto}
+  .topband{flex-direction:column}
+  .indexcard{flex:0 0 auto;border-right:0}
+  .lede{border-bottom:var(--rule) solid var(--ink)}
+  .about,.contact{grid-template-columns:1fr}
+  .photo{max-width:420px}
+}
+@media (max-width:760px){
+  .vault{min-height:auto}
+  .run{display:block;min-height:0}
+  .box{width:100%;border-right:0;border-bottom:var(--rule) solid var(--ink);flex-direction:row;gap:16px;align-items:flex-start;padding:14px 16px}
+  .box .tag{flex:1}
+  .box .hub{flex:0 0 72px;width:72px;margin:4px 0 0}
+  .box .spine{display:none}
+  .box:hover,.box[aria-pressed="true"]{transform:none}
+  .box[aria-pressed="true"]{box-shadow:none;border-left:0}
+  .slot{flex:none;width:100%;border-left:0;border-top:var(--rule) dashed var(--label);padding:16px}
+  .slot .punch{display:none}
+  .sheet{grid-template-columns:1fr}
+  .sheet>div{border-right:0;border-bottom:2px solid var(--ink)}
+  .sheet .tracks{columns:1}
+  .sheet .play{grid-column:auto;width:100%;justify-content:center}
+  .labelsheet{grid-template-columns:1fr}
+  .labelsheet .lbl{border-right:0;border-bottom:2px dashed var(--board-dark)}
+  .labelsheet .lbl:last-child{border-bottom:0}
+  .row2{grid-template-columns:1fr}
+  .cue{min-width:0;width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ VAULT : first viewport ============ -->
+<main class="vault board-ground">
+  <div class="topband">
+    <header class="indexcard">
+      <h1>Christian<br>Waldo</h1>
+      <div class="rule"></div>
+      <ul class="services">
+        <li>Production</li>
+        <li>Mixing</li>
+        <li>Mastering</li>
+        <li>Commissioned &amp; custom music</li>
+      </ul>
+      <span class="shelfmark">VAULT<br>SHELF 01</span>
+    </header>
+
+    <div class="lede">
+      <p><strong>One pair of ears from the first idea to the delivered master.</strong>
+      Records, mixes and scores kept on one shelf. Pull a box to hear what came out of it, then put a new one at the end of the run.</p>
+
+      <div class="cue">
+        <span class="caps">On the deck</span>
+        <span class="now"><b id="cueTitle">Reel 04 — Placeholder Score</b> <span id="cueTime">02:48</span></span>
+        <span class="bar"><i id="cueBar"></i></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="shelf" aria-labelledby="shelfHeading">
+    <h2 id="shelfHeading" class="sr">Selected work</h2>
+    <div class="rail" aria-hidden="true"></div>
+    <div class="run" id="run">
+
+      <button class="box" type="button" aria-pressed="false" data-reel="1"
+        data-title="Placeholder Record" data-credit="placeholder artist · 2024 · produced, mixed"
+        data-tracks="Opening placeholder|3:41;Second placeholder|4:12;Third placeholder|2:58;Fourth placeholder|5:06;Fifth placeholder|3:33;Sixth placeholder|4:41"
+        data-length="38:12">
+        <span class="tag">
+          <span class="no">REEL 01 / 2024</span>
+          <span class="ttl">Placeholder<br>Record</span>
+          <span class="meta">placeholder artist<br>produced · mixed<br>10 tracks · 38:12</span>
+        </span>
+        <span class="hub" aria-hidden="true"></span>
+        <span class="spine"><span>SIDE A/B</span><span>LP</span></span>
+      </button>
+
+      <button class="box" type="button" aria-pressed="false" data-reel="2"
+        data-title="Placeholder EP" data-credit="placeholder artist · 2024 · mixed, mastered"
+        data-tracks="First placeholder|3:52;Second placeholder|4:04;Third placeholder|3:19;Fourth placeholder|4:25"
+        data-length="15:40">
+        <span class="tag">
+          <span class="no">REEL 02 / 2024</span>
+          <span class="ttl">Placeholder<br>EP</span>
+          <span class="meta">placeholder artist<br>mixed · mastered<br>4 tracks · 15:40</span>
+        </span>
+        <span class="hub" aria-hidden="true"></span>
+        <span class="spine"><span>SIDE A/B</span><span>12"</span></span>
+      </button>
+
+      <button class="box" type="button" aria-pressed="false" data-reel="3"
+        data-title="Placeholder Single" data-credit="placeholder artist · 2023 · produced"
+        data-tracks="A side placeholder|3:22;B side placeholder|3:08"
+        data-length="03:22">
+        <span class="tag">
+          <span class="no">REEL 03 / 2023</span>
+          <span class="ttl">Placeholder<br>Single</span>
+          <span class="meta">placeholder artist<br>produced<br>1 track · 03:22</span>
+        </span>
+        <span class="hub" aria-hidden="true"></span>
+        <span class="spine"><span>SIDE A/B</span><span>7"</span></span>
+      </button>
+
+      <button class="box" type="button" aria-pressed="true" data-reel="4"
+        data-title="Placeholder Score" data-credit="placeholder film · 2023 · composed, mixed"
+        data-tracks="Main title placeholder|2:48;Cue 02 placeholder|1:34;Cue 07 placeholder|3:11;Cue 14 placeholder|2:22;End title placeholder|4:02"
+        data-length="41:05">
+        <span class="tag">
+          <span class="no">REEL 04 / 2023</span>
+          <span class="ttl">Placeholder<br>Score</span>
+          <span class="meta">placeholder film<br>composed · mixed<br>22 cues · 41:05</span>
+        </span>
+        <span class="hub" aria-hidden="true"></span>
+        <span class="spine"><span>PULLED</span><span>PLAYING</span></span>
+      </button>
+
+      <button class="box" type="button" aria-pressed="false" data-reel="5"
+        data-title="Placeholder Album" data-credit="placeholder artist · 2022 · mastered"
+        data-tracks="Side A placeholder|4:18;Side A placeholder|3:46;Side B placeholder|5:02;Side B placeholder|3:55"
+        data-length="34:51">
+        <span class="tag">
+          <span class="no">REEL 05 / 2022</span>
+          <span class="ttl">Placeholder<br>Album</span>
+          <span class="meta">placeholder artist<br>mastered<br>9 tracks · 34:51</span>
+        </span>
+        <span class="hub" aria-hidden="true"></span>
+        <span class="spine"><span>SIDE A/B</span><span>LP</span></span>
+      </button>
+
+      <button class="box" type="button" aria-pressed="false" data-reel="6"
+        data-title="Placeholder Session" data-credit="placeholder brand · 2022 · custom music"
+        data-tracks="Cue 01 placeholder|0:30;Cue 02 placeholder|1:00;Cue 03 placeholder|0:15;Cue 04 placeholder|2:10"
+        data-length="09:30">
+        <span class="tag">
+          <span class="no">REEL 06 / 2022</span>
+          <span class="ttl">Placeholder<br>Session</span>
+          <span class="meta">placeholder brand<br>custom music<br>6 cues · 09:30</span>
+        </span>
+        <span class="hub" aria-hidden="true"></span>
+        <span class="spine"><span>CUE REEL</span><span>DIGI</span></span>
+      </button>
+
+      <div class="slot">
+        <a class="blank" href="#start">
+          <span class="no">EMPTY SLOT 07</span>
+          <span class="t">Start a<br>project</span>
+          <span class="lines" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="arrow">WRITE THE LABEL →</span>
+        </a>
+        <span class="punch" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </div>
+
+    </div>
+
+    <!-- reel sheet: the pulled box, opened -->
+    <div class="sheet" id="sheet" aria-live="polite">
+      <div>
+        <span class="caps">Reel 04 — contents</span>
+        <span class="title" id="sheetTitle">Placeholder Score</span>
+        <span class="credit" id="sheetCredit">placeholder film · 2023 · composed, mixed</span>
+      </div>
+      <div>
+        <span class="caps">Logged takes</span>
+        <ul class="tracks" id="sheetTracks"></ul>
+      </div>
+      <div style="display:flex">
+        <button class="play" type="button" id="playBtn" aria-pressed="true">
+          <svg viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M1 1.2v11.6L11 7z" fill="currentColor"/></svg>
+          <span id="playLabel">Stop reel</span>
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ LABEL SHEET : services ============ -->
+<section aria-labelledby="svcHeading" style="padding-bottom:clamp(48px,6vw,90px)">
+  <div class="section-head">
+    <h2 id="svcHeading">What goes<br>on the label</h2>
+    <p>Four things leave this room. Most records use more than one of them, and they cost less to do together than apart.</p>
+  </div>
+  <div class="labelsheet">
+    <div class="lbl">
+      <span class="no">LABEL 01</span>
+      <h3>Production</h3>
+      <p>From a voice memo to a finished arrangement: writing, tracking, players, and the decisions that make a record sound like one record.</p>
+      <div class="fmt">By the song or by the record</div>
+    </div>
+    <div class="lbl">
+      <span class="no">LABEL 02</span>
+      <h3>Mixing</h3>
+      <p>Stems in, balance out. Recalls included, printed in every format your release needs, with instrumentals and a cappellas delivered alongside.</p>
+      <div class="fmt">Per song · recalls included</div>
+    </div>
+    <div class="lbl">
+      <span class="no">LABEL 03</span>
+      <h3>Mastering</h3>
+      <p>The last pass before it ships: level, tone and sequence set for streaming, and cut separately for vinyl when there is a lacquer in the plan.</p>
+      <div class="fmt">Per song or per side</div>
+    </div>
+    <div class="lbl">
+      <span class="no">LABEL 04</span>
+      <h3>Custom<br>music</h3>
+      <p>Score and commissioned cues for film, brands and installations, written to picture and delivered as stems with the cue sheet filled in.</p>
+      <div class="fmt">By the brief</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDEX CARD : about ============ -->
+<section class="about board-ground" aria-labelledby="aboutHeading">
+  <div class="card">
+    <h2 id="aboutHeading">About the vault</h2>
+    <p>[Placeholder bio. Replace with real copy.] Christian Waldo is a music producer working across production, mixing, mastering and commissioned music. Records that come through this room stay with one pair of ears from the first voice memo to the delivered master, so nothing gets lost in a handoff between rooms.</p>
+    <p>[Placeholder paragraph.] Describe the room, the instruments, how a session usually runs, and what an artist can expect in the first week. Two short paragraphs is plenty.</p>
+    <span class="mark">PLACEHOLDER COPY</span>
+    <ul class="facts">
+      <li><b>Based</b><span>[Placeholder city]</span></li>
+      <li><b>Works in</b><span>[Placeholder genres]</span></li>
+      <li><b>Room</b><span>[Placeholder studio name]</span></li>
+      <li><b>Delivers</b><span>Stems, instrumentals, masters for streaming and vinyl</span></li>
+      <li><b>Typical turnaround</b><span>[Placeholder: e.g. mix in 5 working days]</span></li>
+    </ul>
+  </div>
+  <figure class="photo">
+    <div class="plate"><span>Photo slot<br>replace with a real portrait</span></div>
+    <figcaption class="cap">[Placeholder caption: Christian in the room, year.]</figcaption>
+  </figure>
+</section>
+
+<!-- ============ EMPTY SLOT 07 : contact ============ -->
+<section class="contact blue-ground" id="start" aria-labelledby="startHeading">
+  <div class="pitch">
+    <h2 id="startHeading">Empty<br>slot 07</h2>
+    <p>Tell me what the record is, roughly when it needs to exist, and what you have so far: a demo, a voice memo, or nothing yet.</p>
+    <div class="direct">
+      Or write directly:<br>
+      <a href="mailto:hello@placeholder.com">hello@placeholder.com</a>
+    </div>
+  </div>
+
+  <form id="startForm" novalidate>
+    <div class="row2">
+      <div class="field">
+        <label for="f-name">Name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Who is writing" required>
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" placeholder="where to reply" required>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label for="f-work">What it needs</label>
+        <select id="f-work" name="work">
+          <option>Production</option>
+          <option>Mixing</option>
+          <option>Mastering</option>
+          <option>Custom music</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-when">When</label>
+        <input id="f-when" name="when" type="text" placeholder="release date or month">
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-note">The project</label>
+      <textarea id="f-note" name="note" placeholder="A few lines about the songs, the players, and a link if you have one." required></textarea>
+    </div>
+    <button class="send" type="submit">Put it on the shelf</button>
+    <p class="formnote" id="formNote">This form is a placeholder. Connect it to an inbox or a form service before launch.</p>
+  </form>
+</section>
+
+<footer>
+  <div class="in">
+    <span>Christian Waldo</span>
+    <span>Shelf 01 — six reels kept</span>
+    <a href="mailto:hello@placeholder.com">hello@placeholder.com</a>
+  </div>
+  <p class="replace">Placeholders to replace before launch: all six reel boxes (titles, artists, roles, track lists and lengths), the portrait in the photo slot, both about paragraphs and the facts list, the email address, and the form's destination. Nothing on this page states a real credit, client, price or number.</p>
+</footer>
+
+<script>
+(function(){
+  var run = document.getElementById('run');
+  var boxes = Array.prototype.slice.call(run.querySelectorAll('.box'));
+  var sheetTitle = document.getElementById('sheetTitle');
+  var sheetCredit = document.getElementById('sheetCredit');
+  var sheetTracks = document.getElementById('sheetTracks');
+  var sheetCaps = document.querySelector('#sheet .caps');
+  var cueTitle = document.getElementById('cueTitle');
+  var cueTime = document.getElementById('cueTime');
+  var cueBar = document.getElementById('cueBar');
+  var playBtn = document.getElementById('playBtn');
+  var playLabel = document.getElementById('playLabel');
+  var playing = true;
+
+  function render(box){
+    var tracks = (box.dataset.tracks || '').split(';').filter(Boolean);
+    sheetCaps.textContent = 'Reel 0' + box.dataset.reel + ' — contents';
+    sheetTitle.textContent = box.dataset.title;
+    sheetCredit.textContent = box.dataset.credit;
+    sheetTracks.innerHTML = '';
+    tracks.forEach(function(t, i){
+      var parts = t.split('|');
+      var li = document.createElement('li');
+      var a = document.createElement('span');
+      a.textContent = (i + 1 < 10 ? '0' : '') + (i + 1) + '  ' + parts[0];
+      var b = document.createElement('span');
+      b.textContent = parts[1] || '';
+      li.appendChild(a); li.appendChild(b);
+      sheetTracks.appendChild(li);
+    });
+    cueTitle.textContent = 'Reel 0' + box.dataset.reel + ' — ' + box.dataset.title;
+    cueTime.textContent = box.dataset.length;
+    cueBar.style.right = (20 + (box.dataset.reel % 5) * 12) + '%';
+  }
+
+  function select(box){
+    boxes.forEach(function(b){ b.setAttribute('aria-pressed', String(b === box)); });
+    render(box);
+    setPlaying(true);
+  }
+
+  function setPlaying(state){
+    playing = state;
+    playBtn.setAttribute('aria-pressed', String(state));
+    playLabel.textContent = state ? 'Stop reel' : 'Play reel';
+    var current = run.querySelector('.box[aria-pressed="true"] .hub');
+    if (current) current.style.animationPlayState = state ? 'running' : 'paused';
+  }
+
+  boxes.forEach(function(box){
+    box.addEventListener('click', function(){ select(box); });
+  });
+
+  run.addEventListener('keydown', function(e){
+    var i = boxes.indexOf(document.activeElement);
+    if (i < 0) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+      e.preventDefault();
+      var next = boxes[(i + (e.key === 'ArrowRight' ? 1 : boxes.length - 1)) % boxes.length];
+      next.focus(); select(next);
+    }
+  });
+
+  playBtn.addEventListener('click', function(){ setPlaying(!playing); });
+
+  render(run.querySelector('.box[aria-pressed="true"]'));
+
+  // form: real validation, real states, no pretend submission
+  var form = document.getElementById('startForm');
+  var note = document.getElementById('formNote');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    var body = form.note.value.trim();
+    var missing = [];
+    if (!name) missing.push('your name');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) missing.push('an email that can be replied to');
+    if (!body) missing.push('a line or two about the project');
+    if (missing.length){
+      note.className = 'formnote err';
+      note.textContent = 'Still needed: ' + missing.join(', ') + '.';
+      return;
+    }
+    note.className = 'formnote';
+    note.textContent = 'Nothing was sent. This form has no destination yet. Connect it to an inbox or a form service before launch.';
+  });
+})();
+</script>
+</body>
+</html>

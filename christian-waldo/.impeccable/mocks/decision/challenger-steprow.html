@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Step Row</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{background:#2b333a;font-family:"Archivo Narrow",sans-serif;color:#eef3f7}
+.panel{width:1440px;height:900px;background:#2b333a;position:relative;padding:44px 48px}
+.top{display:flex;justify-content:space-between;align-items:flex-start}
+h1{font-weight:700;font-size:64px;line-height:.9;text-transform:uppercase;letter-spacing:-.01em}
+.sub{font-size:12px;letter-spacing:.3em;font-weight:700;color:#9fb0bd;margin-top:14px}
+.readout{border:3px solid #7e8b96;padding:14px 20px;min-width:360px}
+.readout .k{font-size:10px;letter-spacing:.26em;color:#9fb0bd;font-weight:700}
+.readout .v{font-family:"Share Tech Mono",monospace;font-size:34px;color:#8fc4f2;margin-top:8px;letter-spacing:.06em}
+.readout .v b{color:#eef3f7}
+.lede{margin-top:34px;max-width:720px;font-size:19px;line-height:1.5;color:#c3d4e2}
+.lede b{color:#fff;font-weight:700}
+.row{position:absolute;left:0;right:0;top:366px;height:234px;background:#eef3f7;border-top:4px solid #0f1317;border-bottom:4px solid #0f1317;display:flex}
+.key{flex:1;border-right:3px solid #2b333a;position:relative;background:#c3d4e2;padding:16px 10px}
+.key:last-child{border-right:0}
+.key .n{font-family:"Share Tech Mono",monospace;font-size:13px;color:#4a5660}
+.key .t{position:absolute;left:10px;right:10px;bottom:56px;font-size:13px;font-weight:700;text-transform:uppercase;line-height:1.15;color:#1d242a}
+.key .led{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;width:22px;height:22px;border:3px solid #7e8b96;border-radius:50%}
+.key.on{background:#fff}
+.key.on .led{background:#2f6fb0;border-color:#2f6fb0}
+.key.acc{background:#2f6fb0}
+.key.acc .n{color:#cfe4f7}.key.acc .t{color:#fff}
+.key.acc .led{background:#fff;border-color:#fff}
+.key.head{background:#eef3f7}
+.key.head .led{box-shadow:0 0 0 6px #2f6fb0}
+.labels{position:absolute;left:0;right:0;top:330px;display:flex;font-size:10px;letter-spacing:.2em;font-weight:700;color:#9fb0bd}
+.labels span{flex:1;padding-left:10px}
+.bank{position:absolute;left:48px;top:640px;display:flex;gap:10px}
+.bank b{border:3px solid #7e8b96;padding:10px 16px;font-size:11px;letter-spacing:.2em;color:#c3d4e2}
+.bank b.sel{border-color:#2f6fb0;color:#fff;background:#2f6fb0}
+.cta{position:absolute;right:48px;top:636px;display:flex;align-items:center;gap:18px}
+.cta .pad{width:92px;height:92px;background:#2f6fb0;border:4px solid #eef3f7;display:flex;align-items:center;justify-content:center;font-size:12px;letter-spacing:.14em;text-align:center;line-height:1.2;font-weight:700}
+.cta .txt{text-align:right}
+.cta .txt .k{font-size:11px;letter-spacing:.26em;color:#9fb0bd;font-weight:700}
+.cta .txt .t{font-size:30px;font-weight:700;text-transform:uppercase;line-height:1}
+.foot{position:absolute;left:48px;right:48px;bottom:36px;border-top:3px solid #4a5660;padding-top:16px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.24em;color:#9fb0bd;font-weight:700}
+</style></head><body><div class="panel">
+  <div class="top">
+    <div><h1>Christian<br>Waldo</h1><div class="sub">PRODUCTION · MIXING · MASTERING · CUSTOM MUSIC</div></div>
+    <div class="readout"><div class="k">TEMPO / WHAT HE DOES</div><div class="v"><b>16</b> STEPS · <b>6</b> RECORDS · <b>1</b> ROOM</div></div>
+  </div>
+  <div class="lede"><b>Punch in a project and it gets a pulse.</b> Every step on this row is a record, a mix or a score. The chase light is running — press one to hear where it went.</div>
+  <div class="labels"><span>BANK A — SELECTED WORK</span></div>
+  <div class="row">
+    <div class="key on"><div class="n">01</div><div class="t">Placeholder<br>Record</div><div class="led"></div></div>
+    <div class="key"><div class="n">02</div><div class="led"></div></div>
+    <div class="key on"><div class="n">03</div><div class="t">Placeholder<br>EP</div><div class="led"></div></div>
+    <div class="key"><div class="n">04</div><div class="led"></div></div>
+    <div class="key acc"><div class="n">05</div><div class="t">Placeholder<br>Score</div><div class="led"></div></div>
+    <div class="key"><div class="n">06</div><div class="led"></div></div>
+    <div class="key on"><div class="n">07</div><div class="t">Placeholder<br>Single</div><div class="led"></div></div>
+    <div class="key head"><div class="n">08</div><div class="led"></div></div>
+    <div class="key on"><div class="n">09</div><div class="t">Placeholder<br>Album</div><div class="led"></div></div>
+    <div class="key"><div class="n">10</div><div class="led"></div></div>
+    <div class="key"><div class="n">11</div><div class="led"></div></div>
+    <div class="key on"><div class="n">12</div><div class="t">Placeholder<br>Session</div><div class="led"></div></div>
+    <div class="key"><div class="n">13</div><div class="led"></div></div>
+    <div class="key"><div class="n">14</div><div class="led"></div></div>
+    <div class="key"><div class="n">15</div><div class="led"></div></div>
+    <div class="key"><div class="n">16</div><div class="led"></div></div>
+  </div>
+  <div class="bank"><b class="sel">PRODUCTION</b><b>MIXING</b><b>MASTERING</b><b>CUSTOM MUSIC</b><b>ABOUT</b></div>
+  <div class="cta"><div class="txt"><div class="k">EMPTY STEP</div><div class="t">Start a project</div></div><div class="pad">ARM<br>STEP</div></div>
+  <div class="foot"><span>CHASE LIGHT RUNNING — STEP 08</span><span>PLACEHOLDER CITY</span><span>CHRISTIANWALDO@PLACEHOLDER</span></div>
+</div></body></html>

@@ -1,0 +1,18 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:42:33.193Z",
+        "reason": "false positive: the flagged containers carry 22-88px padding (.contact 44-88px, .lbl 24-34px, .labelsheet 14-20px, .sheet>div 22-34px); the rule is counting full-width block children whose boxes meet the content edge, not text near a border. Verified in the rendered page at 1440 and 390."
+      }
+    ]
+  }
+}

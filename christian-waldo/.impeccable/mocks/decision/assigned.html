@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Tape Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Archivo+Narrow:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{background:#8d9aa4;font-family:"Courier Prime",monospace;color:#2d363d}
+.sheet{position:relative;width:1440px;height:900px;background:
+  repeating-linear-gradient(90deg,#949fa8 0 2px,#8d9aa4 2px 7px)}
+.index{position:absolute;left:0;top:0;width:470px;height:270px;background:#f7f9fa;border-right:3px solid #2d363d;border-bottom:3px solid #2d363d;padding:34px 36px}
+.index .stamp{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:11px;letter-spacing:.24em;color:#2f6fb0;border:2px solid #2f6fb0;display:inline-block;padding:3px 7px}
+.index h1{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:60px;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;margin:22px 0 14px}
+.index .svc{font-size:13px;line-height:1.75;letter-spacing:.02em}
+.index .rule{height:2px;background:#2d363d;margin:16px 0 12px}
+.lede{position:absolute;left:506px;top:40px;width:560px;font-size:17px;line-height:1.6}
+.lede b{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:19px;letter-spacing:.01em}
+.cue{position:absolute;right:40px;top:44px;width:272px;border:3px solid #f7f9fa;padding:16px 18px;color:#f7f9fa}
+.cue .k{font-family:"Archivo Narrow",sans-serif;font-size:11px;letter-spacing:.24em;font-weight:700}
+.cue .n{font-size:15px;line-height:1.5;margin-top:8px}
+.shelf{position:absolute;left:0;bottom:0;width:1440px;height:574px}
+.rail{position:absolute;left:0;top:0;width:1440px;height:14px;background:#4b565e;border-top:3px solid #2d363d;border-bottom:3px solid #f7f9fa}
+.run{position:absolute;left:0;top:14px;height:490px;display:flex;align-items:flex-end;gap:0}
+.box{width:206px;height:430px;background:#c4ccd2;border:3px solid #2d363d;border-right-width:0;position:relative;padding:18px 16px}
+.box:last-child{border-right-width:3px}
+.box .label{background:#f7f9fa;border:2px solid #2d363d;padding:10px 10px 12px;min-height:150px}
+.box .label .no{font-family:"Archivo Narrow",sans-serif;font-size:10px;letter-spacing:.2em;font-weight:700;color:#5d6871}
+.box .label .ttl{font-size:16px;font-weight:700;line-height:1.2;margin:8px 0 10px;text-transform:uppercase}
+.box .label .meta{font-size:11px;line-height:1.6;color:#3f4a52}
+.box .spine{position:absolute;left:16px;right:16px;bottom:18px;border-top:2px solid #2d363d;padding-top:10px;font-family:"Archivo Narrow",sans-serif;font-size:11px;letter-spacing:.16em;font-weight:700}
+.box .reel{position:absolute;left:50%;top:216px;transform:translateX(-50%);width:120px;height:120px;border:3px solid #8d9aa4;border-radius:50%}
+.box .reel:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border:3px solid #8d9aa4;border-radius:50%}
+.box.live{background:#f7f9fa;border-color:#2f6fb0;height:468px;z-index:3}
+.box.live .label{border-color:#2f6fb0}
+.box.live .label .ttl,.box.live .spine{color:#2f6fb0}
+.box.live .spine{border-color:#2f6fb0}
+.box.live .reel{border-color:#2f6fb0}
+.box.live .reel:after{border-color:#2f6fb0}
+.slot{width:198px;height:430px;border:3px dashed #f7f9fa;background:transparent;position:relative}
+.slot .blank{position:absolute;left:14px;right:14px;top:18px;background:#2f6fb0;border:2px solid #f7f9fa;padding:14px 12px;color:#fff}
+.slot .blank .k{font-family:"Archivo Narrow",sans-serif;font-size:10px;letter-spacing:.2em;font-weight:700;opacity:.85}
+.slot .blank .t{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:22px;line-height:1.05;text-transform:uppercase;margin-top:8px}
+.slot .punch{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;width:150px;display:flex;justify-content:space-between}
+.slot .punch i{width:14px;height:14px;border:2px solid #f7f9fa;border-radius:50%;display:block}
+.foot{position:absolute;left:0;bottom:0;width:1440px;height:70px;background:#2d363d;color:#dbe6ef;display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-family:"Archivo Narrow",sans-serif;font-size:12px;letter-spacing:.2em;font-weight:700}
+</style></head><body><div class="sheet">
+  <div class="index">
+    <span class="stamp">VAULT INDEX · SHELF 01</span>
+    <h1>Christian<br>Waldo</h1>
+    <div class="rule"></div>
+    <div class="svc">PRODUCTION · MIXING · MASTERING<br>COMMISSIONED &amp; CUSTOM MUSIC</div>
+  </div>
+  <div class="lede"><b>One pair of ears from the first idea to the delivered master.</b><br><br>Records, mixes and scores kept on one shelf. Pull a box to hear what came out of it, then put a new one at the end of the run.</div>
+  <div class="cue"><div class="k">NOW PLAYING</div><div class="n">REEL 04 — side A<br>[placeholder track]  02:48</div></div>
+  <div class="shelf">
+    <div class="rail"></div>
+    <div class="run">
+      <div class="box"><div class="label"><div class="no">REEL 01 / 2024</div><div class="ttl">Placeholder Record</div><div class="meta">ARTIST — placeholder<br>PRODUCED · MIXED<br>10 tracks · 38:12</div></div><div class="reel"></div><div class="spine">SIDE A / SIDE B</div></div>
+      <div class="box"><div class="label"><div class="no">REEL 02 / 2024</div><div class="ttl">Placeholder EP</div><div class="meta">ARTIST — placeholder<br>MIXED · MASTERED<br>4 tracks · 15:40</div></div><div class="reel"></div><div class="spine">SIDE A / SIDE B</div></div>
+      <div class="box"><div class="label"><div class="no">REEL 03 / 2023</div><div class="ttl">Placeholder Single</div><div class="meta">ARTIST — placeholder<br>PRODUCED<br>1 track · 03:22</div></div><div class="reel"></div><div class="spine">SIDE A / SIDE B</div></div>
+      <div class="box live"><div class="label"><div class="no">REEL 04 / 2023</div><div class="ttl">Placeholder Score</div><div class="meta">FILM — placeholder<br>COMPOSED · MIXED<br>22 cues · 41:05</div></div><div class="reel"></div><div class="spine">PULLED — PLAYING</div></div>
+      <div class="box"><div class="label"><div class="no">REEL 05 / 2022</div><div class="ttl">Placeholder Album</div><div class="meta">ARTIST — placeholder<br>MASTERED<br>9 tracks · 34:51</div></div><div class="reel"></div><div class="spine">SIDE A / SIDE B</div></div>
+      <div class="box"><div class="label"><div class="no">REEL 06 / 2022</div><div class="ttl">Placeholder Session</div><div class="meta">BRAND — placeholder<br>CUSTOM MUSIC<br>6 cues · 09:30</div></div><div class="reel"></div><div class="spine">SIDE A / SIDE B</div></div>
+      <div class="slot"><div class="blank"><div class="k">EMPTY SLOT 07</div><div class="t">Start a<br>project</div></div><div class="punch"><i></i><i></i><i></i><i></i></div></div>
+    </div>
+  </div>
+  <div class="foot"><span>SHELF 01 OF 01 — SIX REELS KEPT</span><span>ABOUT THE VAULT ↓</span><span>CHRISTIANWALDO@PLACEHOLDER</span></div>
+</div></body></html>

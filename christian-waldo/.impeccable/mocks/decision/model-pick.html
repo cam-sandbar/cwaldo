@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Take Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Archivo+Narrow:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{background:#9aa5ad;font-family:"Courier Prime",monospace;color:#333c44}
+.page{width:1440px;height:900px;padding:26px 60px;background:#9aa5ad}
+.sheet{width:1320px;height:848px;background:#fff;border:3px solid #333c44;position:relative;
+  background-image:repeating-linear-gradient(180deg,transparent 0 37px,#e7eef5 37px 39px);background-position:0 230px}
+.hd{display:flex;border-bottom:3px solid #333c44}
+.hd .cell{border-right:2px solid #333c44;padding:14px 18px}
+.hd .cell .k{font-family:"Archivo Narrow",sans-serif;font-size:10px;letter-spacing:.22em;font-weight:700;color:#6b767e}
+.hd .cell .v{font-size:15px;margin-top:6px}
+.hd .name{flex:0 0 560px;padding:22px 22px 18px}
+.hd .name h1{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:56px;line-height:.92;text-transform:uppercase}
+.hd .name .sub{font-size:13px;letter-spacing:.06em;margin-top:10px}
+.hd .grow{flex:1}
+.stamp{position:absolute;right:34px;top:26px;transform:rotate(-7deg);border:3px solid #2f6fb0;color:#2f6fb0;font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:13px;letter-spacing:.2em;padding:8px 12px;line-height:1.25;text-align:center}
+.bar{display:flex;border-bottom:3px solid #333c44;font-family:"Archivo Narrow",sans-serif;font-size:10px;letter-spacing:.22em;font-weight:700;color:#6b767e}
+.bar div{padding:9px 18px;border-right:2px solid #333c44}
+.c1{flex:0 0 92px}.c2{flex:1}.c3{flex:0 0 240px}.c4{flex:0 0 210px}.c5{flex:0 0 150px}.c6{flex:0 0 120px;border-right:0 !important}
+.row{display:flex;border-bottom:2px solid #e7eef5;align-items:center}
+.row div{padding:13px 18px;border-right:2px solid #e7eef5;font-size:15px}
+.row .c1{color:#6b767e}
+.row .ttl{font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+.row.keep{background:#eef5fb}
+.row.keep .ttl{color:#2f6fb0}
+.circ{display:inline-block;border:2px solid #2f6fb0;color:#2f6fb0;border-radius:40px;padding:2px 11px;font-family:"Archivo Narrow",sans-serif;font-size:11px;letter-spacing:.16em;font-weight:700}
+.bottom{position:absolute;left:0;right:0;bottom:0;display:flex;border-top:3px solid #333c44;height:206px}
+.notes{flex:1;padding:20px 22px;border-right:3px solid #333c44}
+.notes .k{font-family:"Archivo Narrow",sans-serif;font-size:10px;letter-spacing:.22em;font-weight:700;color:#6b767e}
+.notes p{font-size:15px;line-height:1.65;margin-top:12px;max-width:620px}
+.blank{flex:0 0 480px;background:#2f6fb0;color:#fff;padding:24px 26px;position:relative}
+.blank .k{font-family:"Archivo Narrow",sans-serif;font-size:10px;letter-spacing:.22em;font-weight:700;opacity:.8}
+.blank h2{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:40px;line-height:.98;text-transform:uppercase;margin:12px 0 14px}
+.blank .line{height:2px;background:#fff;opacity:.55;margin:14px 0}
+.blank .cta{display:inline-block;background:#fff;color:#2f6fb0;font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:14px;letter-spacing:.18em;padding:12px 18px;border:2px solid #fff}
+</style></head><body><div class="page"><div class="sheet">
+  <div class="hd">
+    <div class="name"><h1>Christian<br>Waldo</h1><div class="sub">PRODUCTION · MIXING · MASTERING · CUSTOM MUSIC</div></div>
+    <div class="cell grow"><div class="k">STUDIO</div><div class="v">placeholder city</div><div class="k" style="margin-top:14px">BOOKING</div><div class="v">christianwaldo@placeholder</div></div>
+    <div class="cell" style="flex:0 0 300px;border-right:0"><div class="k">SHEET</div><div class="v">No. 001 — selected work</div><div class="k" style="margin-top:14px">ENGINEER</div><div class="v">C. Waldo</div></div>
+  </div>
+  <div class="stamp">ONE PAIR<br>OF EARS</div>
+  <div class="bar"><div class="c1">TAKE</div><div class="c2">TITLE</div><div class="c3">ARTIST</div><div class="c4">ROLE</div><div class="c5">LENGTH</div><div class="c6">KEEP</div></div>
+  <div class="row"><div class="c1">01</div><div class="c2 ttl">Placeholder Record</div><div class="c3">placeholder artist</div><div class="c4">produced · mixed</div><div class="c5">38:12</div><div class="c6"></div></div>
+  <div class="row keep"><div class="c1">02</div><div class="c2 ttl">Placeholder Single</div><div class="c3">placeholder artist</div><div class="c4">produced</div><div class="c5">03:22</div><div class="c6"><span class="circ">KEEP</span></div></div>
+  <div class="row"><div class="c1">03</div><div class="c2 ttl">Placeholder EP</div><div class="c3">placeholder artist</div><div class="c4">mixed · mastered</div><div class="c5">15:40</div><div class="c6"></div></div>
+  <div class="row"><div class="c1">04</div><div class="c2 ttl">Placeholder Score</div><div class="c3">placeholder film</div><div class="c4">composed · mixed</div><div class="c5">41:05</div><div class="c6"></div></div>
+  <div class="row"><div class="c1">05</div><div class="c2 ttl">Placeholder Session</div><div class="c3">placeholder brand</div><div class="c4">custom music</div><div class="c5">09:30</div><div class="c6"></div></div>
+  <div class="bottom">
+    <div class="notes"><div class="k">SESSION NOTES / ABOUT</div><p>A producer who stays on the record from the first voice memo to the delivered master — writing, tracking, mixing and mastering in one room, so nothing gets lost in a handoff. [Placeholder bio: replace with real copy.]</p></div>
+    <div class="blank"><div class="k">ROW 06 — LEFT BLANK</div><h2>Your<br>project</h2><div class="line"></div><span class="cta">START A TAKE SHEET →</span></div>
+  </div>
+</div></div></body></html>
